@@ -1,0 +1,39 @@
+
+<div *ngIf="tbc_lab_tercerizado">
+    <h2><span jhiTranslate="limsApp.tbc_lab_tercerizado.detail.title">Tbc Lab Tercerizado</span> {{tbc_lab_tercerizado.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row">
+        <dt><span jhiTranslate="limsApp.tbc_lab_tercerizado.nome">Nome</span></dt>
+        <dd>
+            <span>{{tbc_lab_tercerizado.nome}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_lab_tercerizado.descricao">Descricao</span></dt>
+        <dd>
+            <span>{{tbc_lab_tercerizado.descricao}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_lab_tercerizado.removido">Removido</span></dt>
+        <dd>
+            <span>{{tbc_lab_tercerizado.removido}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_lab_tercerizado.tbc_instituicao">Tbc Instituicao</span></dt>
+        <dd>
+            <div *ngIf="tbc_lab_tercerizado.tbc_instituicao">
+                <a [routerLink]="['/tbc-instituicao', tbc_lab_tercerizado.tbc_instituicao?.id]">{{tbc_lab_tercerizado.tbc_instituicao?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'tbc-lab-tercerizado/'+ tbc_lab_tercerizado.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

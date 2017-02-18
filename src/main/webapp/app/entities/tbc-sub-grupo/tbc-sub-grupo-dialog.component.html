@@ -1,0 +1,84 @@
+
+
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+        <h4 class="modal-title" id="myTbc_sub_grupoLabel" jhiTranslate="limsApp.tbc_sub_grupo.home.createOrEditLabel">Create or edit a Tbc Sub Grupo</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!tbc_sub_grupo.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="tbc_sub_grupo.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="limsApp.tbc_sub_grupo.nome" for="field_nome">Nome</label>
+            <input type="text" class="form-control" name="nome" id="field_nome"
+                [(ngModel)]="tbc_sub_grupo.nome"
+            required />
+            <div [hidden]="!(editForm.controls.nome?.dirty && editForm.controls.nome?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nome?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="limsApp.tbc_sub_grupo.descricao" for="field_descricao">Descricao</label>
+            <input type="text" class="form-control" name="descricao" id="field_descricao"
+                [(ngModel)]="tbc_sub_grupo.descricao"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="limsApp.tbc_sub_grupo.sigla" for="field_sigla">Sigla</label>
+            <input type="text" class="form-control" name="sigla" id="field_sigla"
+                [(ngModel)]="tbc_sub_grupo.sigla"
+            required minlength="1" maxlength="20" />
+            <div [hidden]="!(editForm.controls.sigla?.dirty && editForm.controls.sigla?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.sigla?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.sigla?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 1 }">
+                   This field is required to be at least 1 characters.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.sigla?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 20 }">
+                   This field cannot be longer than 20 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="limsApp.tbc_sub_grupo.removido" for="field_removido">Removido</label>
+            <input type="checkbox" class="form-control" name="removido" id="field_removido"
+                [(ngModel)]="tbc_sub_grupo.removido"
+             />
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="limsApp.tbc_sub_grupo.tbc_instituicao" for="field_tbc_instituicao">Tbc Instituicao</label>
+            <select class="form-control" id="field_tbc_instituicao" name="tbc_instituicao" [(ngModel)]="tbc_sub_grupo.tbc_instituicao"  required>
+                <option [ngValue]="null"></option>
+                <option [ngValue]="tbc_instituicaoOption.id === tbc_sub_grupo.tbc_instituicao?.id ? tbc_sub_grupo.tbc_instituicao : tbc_instituicaoOption" *ngFor="let tbc_instituicaoOption of tbc_instituicaos; trackBy: trackTbc_instituicaoById">{{tbc_instituicaoOption.id}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.tbc_instituicao?.dirty && editForm.controls.tbc_instituicao?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!tbc_instituicao?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

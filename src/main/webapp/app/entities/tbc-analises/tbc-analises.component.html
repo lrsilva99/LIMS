@@ -1,0 +1,121 @@
+<div>
+    <h2><span jhiTranslate="limsApp.tbc_analises.home.title">Tbc Analises</span>
+        <button class="btn btn-primary float-xs-right create-tbc-analises" [routerLink]="['/', { outlets: { popup: ['tbc-analises-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down"  jhiTranslate="limsApp.tbc_analises.home.createLabel">
+            Create new Tbc Analises
+            </span>
+        </button></h2>
+    <jhi-alert></jhi-alert>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right">
+                        <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'limsApp.tbc_analises.home.search' | translate }}">
+                        <span  class="input-group-btn width-min">
+                            <button class="btn btn-info" (click)="search(currentSearch)">
+                                <span class="fa fa-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" *ngIf="currentSearch">
+                            <button class="btn btn-info" (click)="clear()">
+                                <span class="fa fa-trash-o"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="tbc_analises">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="nome"><span jhiTranslate="limsApp.tbc_analises.nome">Nome</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="descricao"><span jhiTranslate="limsApp.tbc_analises.descricao">Descricao</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="numerodias"><span jhiTranslate="limsApp.tbc_analises.numerodias">Numerodias</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="metpop"><span jhiTranslate="limsApp.tbc_analises.metpop">Metpop</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="removido"><span jhiTranslate="limsApp.tbc_analises.removido">Removido</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tercerizado"><span jhiTranslate="limsApp.tbc_analises.tercerizado">Tercerizado</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="directiva_data_atu"><span jhiTranslate="limsApp.tbc_analises.directiva_data_atu">Directiva Data Atu</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tbc_sub_grupo.id"><span jhiTranslate="limsApp.tbc_analises.tbc_sub_grupo">Tbc Sub Grupo</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tbc_grupo_analise.id"><span jhiTranslate="limsApp.tbc_analises.tbc_grupo_analise">Tbc Grupo Analise</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tbc_tipo_cadastro.id"><span jhiTranslate="limsApp.tbc_analises.tbc_tipo_cadastro">Tbc Tipo Cadastro</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tbc_instituicao.id"><span jhiTranslate="limsApp.tbc_analises.tbc_instituicao">Tbc Instituicao</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tbc_report.id"><span jhiTranslate="limsApp.tbc_analises.tbc_report">Tbc Report</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let tbc_analises of tbc_analises ;trackBy: trackId">
+                <td><a [routerLink]="['../tbc-analises', tbc_analises.id ]">{{tbc_analises.id}}</a></td>
+                <td>{{tbc_analises.nome}}</td>
+                <td>{{tbc_analises.descricao}}</td>
+                <td>{{tbc_analises.numerodias}}</td>
+                <td>{{tbc_analises.metpop}}</td>
+                <td>{{tbc_analises.removido}}</td>
+                <td>{{tbc_analises.tercerizado}}</td>
+                <td>{{tbc_analises.directiva_data_atu | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="tbc_analises.tbc_sub_grupo">
+                        <a [routerLink]="['../tbc-sub-grupo', tbc_analises.tbc_sub_grupo?.id ]" >{{tbc_analises.tbc_sub_grupo?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="tbc_analises.tbc_grupo_analise">
+                        <a [routerLink]="['../tbc-grupo-analise', tbc_analises.tbc_grupo_analise?.id ]" >{{tbc_analises.tbc_grupo_analise?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="tbc_analises.tbc_tipo_cadastro">
+                        <a [routerLink]="['../tbc-tipo-cadastro', tbc_analises.tbc_tipo_cadastro?.id ]" >{{tbc_analises.tbc_tipo_cadastro?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="tbc_analises.tbc_instituicao">
+                        <a [routerLink]="['../tbc-instituicao', tbc_analises.tbc_instituicao?.id ]" >{{tbc_analises.tbc_instituicao?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="tbc_analises.tbc_report">
+                        <a [routerLink]="['../tbc-report', tbc_analises.tbc_report?.id ]" >{{tbc_analises.tbc_report?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-xs-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../tbc-analises', tbc_analises.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'tbc-analises/'+ tbc_analises.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'tbc-analises/'+ tbc_analises.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+        <!-- Pager is not implemented yet, so this is normal pagination instead -->
+        <div class="text-xs-center" *ngIf="tbc_analises && tbc_analises.length">
+            <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page"  (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+</div>

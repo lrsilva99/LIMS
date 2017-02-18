@@ -1,0 +1,69 @@
+
+
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+        <h4 class="modal-title" id="myTbc_plano_teste_analiseLabel" jhiTranslate="limsApp.tbc_plano_teste_analise.home.createOrEditLabel">Create or edit a Tbc Plano Teste Analise</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!tbc_plano_teste_analise.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="tbc_plano_teste_analise.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="limsApp.tbc_plano_teste_analise.ordem" for="field_ordem">Ordem</label>
+            <input type="number" class="form-control" name="ordem" id="field_ordem"
+                [(ngModel)]="tbc_plano_teste_analise.ordem"
+            required />
+            <div [hidden]="!(editForm.controls.ordem?.dirty && editForm.controls.ordem?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.ordem?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.ordem?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="limsApp.tbc_plano_teste_analise.tbc_plano_teste" for="field_tbc_plano_teste">Tbc Plano Teste</label>
+            <select class="form-control" id="field_tbc_plano_teste" name="tbc_plano_teste" [(ngModel)]="tbc_plano_teste_analise.tbc_plano_teste"  required>
+                <option [ngValue]="null"></option>
+                <option [ngValue]="tbc_plano_testeOption.id === tbc_plano_teste_analise.tbc_plano_teste?.id ? tbc_plano_teste_analise.tbc_plano_teste : tbc_plano_testeOption" *ngFor="let tbc_plano_testeOption of tbc_plano_testes; trackBy: trackTbc_plano_testeById">{{tbc_plano_testeOption.id}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.tbc_plano_teste?.dirty && editForm.controls.tbc_plano_teste?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!tbc_plano_teste?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="limsApp.tbc_plano_teste_analise.tbc_analises" for="field_tbc_analises">Tbc Analises</label>
+            <select class="form-control" id="field_tbc_analises" name="tbc_analises" [(ngModel)]="tbc_plano_teste_analise.tbc_analises"  required>
+                <option [ngValue]="null"></option>
+                <option [ngValue]="tbc_analisesOption.id === tbc_plano_teste_analise.tbc_analises?.id ? tbc_plano_teste_analise.tbc_analises : tbc_analisesOption" *ngFor="let tbc_analisesOption of tbc_analises; trackBy: trackTbc_analisesById">{{tbc_analisesOption.id}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.tbc_analises?.dirty && editForm.controls.tbc_analises?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!tbc_analises?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

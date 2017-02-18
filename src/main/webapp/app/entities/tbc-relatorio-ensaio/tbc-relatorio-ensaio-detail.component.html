@@ -1,0 +1,43 @@
+
+<div *ngIf="tbc_relatorio_ensaio">
+    <h2><span jhiTranslate="limsApp.tbc_relatorio_ensaio.detail.title">Tbc Relatorio Ensaio</span> {{tbc_relatorio_ensaio.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row">
+        <dt><span jhiTranslate="limsApp.tbc_relatorio_ensaio.nome">Nome</span></dt>
+        <dd>
+            <span>{{tbc_relatorio_ensaio.nome}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_relatorio_ensaio.descricao">Descricao</span></dt>
+        <dd>
+            <span>{{tbc_relatorio_ensaio.descricao}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_relatorio_ensaio.caminho">Caminho</span></dt>
+        <dd>
+            <span>{{tbc_relatorio_ensaio.caminho}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_relatorio_ensaio.removido">Removido</span></dt>
+        <dd>
+            <span>{{tbc_relatorio_ensaio.removido}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_relatorio_ensaio.tbc_instituicao">Tbc Instituicao</span></dt>
+        <dd>
+            <div *ngIf="tbc_relatorio_ensaio.tbc_instituicao">
+                <a [routerLink]="['/tbc-instituicao', tbc_relatorio_ensaio.tbc_instituicao?.id]">{{tbc_relatorio_ensaio.tbc_instituicao?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'tbc-relatorio-ensaio/'+ tbc_relatorio_ensaio.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

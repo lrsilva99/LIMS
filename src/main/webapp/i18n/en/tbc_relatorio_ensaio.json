@@ -1,0 +1,26 @@
+{
+    "limsApp": {
+        "tbc_relatorio_ensaio" : {
+            "home": {
+                "title": "Tbc Relatorio Ensaios",
+                "createLabel": "Create a new Tbc Relatorio Ensaio",
+                "createOrEditLabel": "Create or edit a Tbc Relatorio Ensaio",
+                "search": "Search for Tbc Relatorio Ensaio"
+            },
+            "created": "A new Tbc Relatorio Ensaio is created with identifier {{ param }}",
+            "updated": "A Tbc Relatorio Ensaio is updated with identifier {{ param }}",
+            "deleted": "A Tbc Relatorio Ensaio is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Tbc Relatorio Ensaio {{ id }}?"
+            },
+            "detail": {
+                "title": "Tbc Relatorio Ensaio"
+            },
+            "nome": "Nome",
+            "descricao": "Descricao",
+            "caminho": "Caminho",
+            "removido": "Removido",
+            "tbc_instituicao": "Tbc Instituicao"
+        }
+    }
+}

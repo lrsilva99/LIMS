@@ -1,0 +1,43 @@
+
+<div *ngIf="tbc_grupo_cliente">
+    <h2><span jhiTranslate="limsApp.tbc_grupo_cliente.detail.title">Tbc Grupo Cliente</span> {{tbc_grupo_cliente.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row">
+        <dt><span jhiTranslate="limsApp.tbc_grupo_cliente.nome">Nome</span></dt>
+        <dd>
+            <span>{{tbc_grupo_cliente.nome}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_grupo_cliente.descricao">Descricao</span></dt>
+        <dd>
+            <span>{{tbc_grupo_cliente.descricao}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_grupo_cliente.removido">Removido</span></dt>
+        <dd>
+            <span>{{tbc_grupo_cliente.removido}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_grupo_cliente.responsavel">Responsavel</span></dt>
+        <dd>
+            <span>{{tbc_grupo_cliente.responsavel}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_grupo_cliente.tbc_instituicao">Tbc Instituicao</span></dt>
+        <dd>
+            <div *ngIf="tbc_grupo_cliente.tbc_instituicao">
+                <a [routerLink]="['/tbc-instituicao', tbc_grupo_cliente.tbc_instituicao?.id]">{{tbc_grupo_cliente.tbc_instituicao?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'tbc-grupo-cliente/'+ tbc_grupo_cliente.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

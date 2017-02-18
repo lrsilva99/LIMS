@@ -1,0 +1,39 @@
+
+<div *ngIf="tbc_frases_opcoes">
+    <h2><span jhiTranslate="limsApp.tbc_frases_opcoes.detail.title">Tbc Frases Opcoes</span> {{tbc_frases_opcoes.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row">
+        <dt><span jhiTranslate="limsApp.tbc_frases_opcoes.nome">Nome</span></dt>
+        <dd>
+            <span>{{tbc_frases_opcoes.nome}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_frases_opcoes.descricao">Descricao</span></dt>
+        <dd>
+            <span>{{tbc_frases_opcoes.descricao}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_frases_opcoes.removido">Removido</span></dt>
+        <dd>
+            <span>{{tbc_frases_opcoes.removido}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_frases_opcoes.tbc_frases">Tbc Frases</span></dt>
+        <dd>
+            <div *ngIf="tbc_frases_opcoes.tbc_frases">
+                <a [routerLink]="['/tbc-frases', tbc_frases_opcoes.tbc_frases?.id]">{{tbc_frases_opcoes.tbc_frases?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'tbc-frases-opcoes/'+ tbc_frases_opcoes.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

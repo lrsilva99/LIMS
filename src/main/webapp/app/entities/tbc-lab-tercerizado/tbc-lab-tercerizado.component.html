@@ -1,0 +1,89 @@
+<div>
+    <h2><span jhiTranslate="limsApp.tbc_lab_tercerizado.home.title">Tbc Lab Tercerizados</span>
+        <button class="btn btn-primary float-xs-right create-tbc-lab-tercerizado" [routerLink]="['/', { outlets: { popup: ['tbc-lab-tercerizado-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down"  jhiTranslate="limsApp.tbc_lab_tercerizado.home.createLabel">
+            Create new Tbc Lab Tercerizado
+            </span>
+        </button></h2>
+    <jhi-alert></jhi-alert>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right">
+                        <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'limsApp.tbc_lab_tercerizado.home.search' | translate }}">
+                        <span  class="input-group-btn width-min">
+                            <button class="btn btn-info" (click)="search(currentSearch)">
+                                <span class="fa fa-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" *ngIf="currentSearch">
+                            <button class="btn btn-info" (click)="clear()">
+                                <span class="fa fa-trash-o"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="tbc_lab_tercerizados">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="nome"><span jhiTranslate="limsApp.tbc_lab_tercerizado.nome">Nome</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="descricao"><span jhiTranslate="limsApp.tbc_lab_tercerizado.descricao">Descricao</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="removido"><span jhiTranslate="limsApp.tbc_lab_tercerizado.removido">Removido</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tbc_instituicao.id"><span jhiTranslate="limsApp.tbc_lab_tercerizado.tbc_instituicao">Tbc Instituicao</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let tbc_lab_tercerizado of tbc_lab_tercerizados ;trackBy: trackId">
+                <td><a [routerLink]="['../tbc-lab-tercerizado', tbc_lab_tercerizado.id ]">{{tbc_lab_tercerizado.id}}</a></td>
+                <td>{{tbc_lab_tercerizado.nome}}</td>
+                <td>{{tbc_lab_tercerizado.descricao}}</td>
+                <td>{{tbc_lab_tercerizado.removido}}</td>
+                <td>
+                    <div *ngIf="tbc_lab_tercerizado.tbc_instituicao">
+                        <a [routerLink]="['../tbc-instituicao', tbc_lab_tercerizado.tbc_instituicao?.id ]" >{{tbc_lab_tercerizado.tbc_instituicao?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-xs-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../tbc-lab-tercerizado', tbc_lab_tercerizado.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'tbc-lab-tercerizado/'+ tbc_lab_tercerizado.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'tbc-lab-tercerizado/'+ tbc_lab_tercerizado.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+        <!-- Pager is not implemented yet, so this is normal pagination instead -->
+        <div class="text-xs-center" *ngIf="tbc_lab_tercerizados && tbc_lab_tercerizados.length">
+            <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page"  (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+</div>

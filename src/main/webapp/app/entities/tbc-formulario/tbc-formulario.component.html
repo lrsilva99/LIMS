@@ -1,0 +1,111 @@
+<div>
+    <h2><span jhiTranslate="limsApp.tbc_formulario.home.title">Tbc Formularios</span>
+        <button class="btn btn-primary float-xs-right create-tbc-formulario" [routerLink]="['/', { outlets: { popup: ['tbc-formulario-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down"  jhiTranslate="limsApp.tbc_formulario.home.createLabel">
+            Create new Tbc Formulario
+            </span>
+        </button></h2>
+    <jhi-alert></jhi-alert>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right">
+                        <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'limsApp.tbc_formulario.home.search' | translate }}">
+                        <span  class="input-group-btn width-min">
+                            <button class="btn btn-info" (click)="search(currentSearch)">
+                                <span class="fa fa-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" *ngIf="currentSearch">
+                            <button class="btn btn-info" (click)="clear()">
+                                <span class="fa fa-trash-o"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="tbc_formularios">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="nome"><span jhiTranslate="limsApp.tbc_formulario.nome">Nome</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="metodo"><span jhiTranslate="limsApp.tbc_formulario.metodo">Metodo</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="descricao"><span jhiTranslate="limsApp.tbc_formulario.descricao">Descricao</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="diasliberacao"><span jhiTranslate="limsApp.tbc_formulario.diasliberacao">Diasliberacao</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="removido"><span jhiTranslate="limsApp.tbc_formulario.removido">Removido</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tbc_instituicao.id"><span jhiTranslate="limsApp.tbc_formulario.tbc_instituicao">Tbc Instituicao</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tbc_sub_grupo.id"><span jhiTranslate="limsApp.tbc_formulario.tbc_sub_grupo">Tbc Sub Grupo</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tbc_grupo_analise.id"><span jhiTranslate="limsApp.tbc_formulario.tbc_grupo_analise">Tbc Grupo Analise</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tbc_tipo_cadastro.id"><span jhiTranslate="limsApp.tbc_formulario.tbc_tipo_cadastro">Tbc Tipo Cadastro</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let tbc_formulario of tbc_formularios ;trackBy: trackId">
+                <td><a [routerLink]="['../tbc-formulario', tbc_formulario.id ]">{{tbc_formulario.id}}</a></td>
+                <td>{{tbc_formulario.nome}}</td>
+                <td>{{tbc_formulario.metodo}}</td>
+                <td>{{tbc_formulario.descricao}}</td>
+                <td>{{tbc_formulario.diasliberacao}}</td>
+                <td>{{tbc_formulario.removido}}</td>
+                <td>
+                    <div *ngIf="tbc_formulario.tbc_instituicao">
+                        <a [routerLink]="['../tbc-instituicao', tbc_formulario.tbc_instituicao?.id ]" >{{tbc_formulario.tbc_instituicao?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="tbc_formulario.tbc_sub_grupo">
+                        <a [routerLink]="['../tbc-sub-grupo', tbc_formulario.tbc_sub_grupo?.id ]" >{{tbc_formulario.tbc_sub_grupo?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="tbc_formulario.tbc_grupo_analise">
+                        <a [routerLink]="['../tbc-grupo-analise', tbc_formulario.tbc_grupo_analise?.id ]" >{{tbc_formulario.tbc_grupo_analise?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="tbc_formulario.tbc_tipo_cadastro">
+                        <a [routerLink]="['../tbc-tipo-cadastro', tbc_formulario.tbc_tipo_cadastro?.id ]" >{{tbc_formulario.tbc_tipo_cadastro?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-xs-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../tbc-formulario', tbc_formulario.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'tbc-formulario/'+ tbc_formulario.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'tbc-formulario/'+ tbc_formulario.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+        <!-- Pager is not implemented yet, so this is normal pagination instead -->
+        <div class="text-xs-center" *ngIf="tbc_formularios && tbc_formularios.length">
+            <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page"  (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+</div>

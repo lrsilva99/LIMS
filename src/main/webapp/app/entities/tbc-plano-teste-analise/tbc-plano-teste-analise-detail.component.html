@@ -1,0 +1,37 @@
+
+<div *ngIf="tbc_plano_teste_analise">
+    <h2><span jhiTranslate="limsApp.tbc_plano_teste_analise.detail.title">Tbc Plano Teste Analise</span> {{tbc_plano_teste_analise.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row">
+        <dt><span jhiTranslate="limsApp.tbc_plano_teste_analise.ordem">Ordem</span></dt>
+        <dd>
+            <span>{{tbc_plano_teste_analise.ordem}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_plano_teste_analise.tbc_plano_teste">Tbc Plano Teste</span></dt>
+        <dd>
+            <div *ngIf="tbc_plano_teste_analise.tbc_plano_teste">
+                <a [routerLink]="['/tbc-plano-teste', tbc_plano_teste_analise.tbc_plano_teste?.id]">{{tbc_plano_teste_analise.tbc_plano_teste?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_plano_teste_analise.tbc_analises">Tbc Analises</span></dt>
+        <dd>
+            <div *ngIf="tbc_plano_teste_analise.tbc_analises">
+                <a [routerLink]="['/tbc-analises', tbc_plano_teste_analise.tbc_analises?.id]">{{tbc_plano_teste_analise.tbc_analises?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'tbc-plano-teste-analise/'+ tbc_plano_teste_analise.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

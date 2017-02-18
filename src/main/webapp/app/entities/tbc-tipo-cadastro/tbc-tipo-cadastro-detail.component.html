@@ -1,0 +1,39 @@
+
+<div *ngIf="tbc_tipo_cadastro">
+    <h2><span jhiTranslate="limsApp.tbc_tipo_cadastro.detail.title">Tbc Tipo Cadastro</span> {{tbc_tipo_cadastro.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row">
+        <dt><span jhiTranslate="limsApp.tbc_tipo_cadastro.nome">Nome</span></dt>
+        <dd>
+            <span>{{tbc_tipo_cadastro.nome}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_tipo_cadastro.descricao">Descricao</span></dt>
+        <dd>
+            <span>{{tbc_tipo_cadastro.descricao}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_tipo_cadastro.removido">Removido</span></dt>
+        <dd>
+            <span>{{tbc_tipo_cadastro.removido}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_tipo_cadastro.tbc_instituicao">Tbc Instituicao</span></dt>
+        <dd>
+            <div *ngIf="tbc_tipo_cadastro.tbc_instituicao">
+                <a [routerLink]="['/tbc-instituicao', tbc_tipo_cadastro.tbc_instituicao?.id]">{{tbc_tipo_cadastro.tbc_instituicao?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'tbc-tipo-cadastro/'+ tbc_tipo_cadastro.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

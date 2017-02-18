@@ -1,0 +1,85 @@
+
+<div *ngIf="tbc_cliente">
+    <h2><span jhiTranslate="limsApp.tbc_cliente.detail.title">Tbc Cliente</span> {{tbc_cliente.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row">
+        <dt><span jhiTranslate="limsApp.tbc_cliente.nome">Nome</span></dt>
+        <dd>
+            <span>{{tbc_cliente.nome}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_cliente.cep">Cep</span></dt>
+        <dd>
+            <span>{{tbc_cliente.cep}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_cliente.endereco">Endereco</span></dt>
+        <dd>
+            <span>{{tbc_cliente.endereco}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_cliente.email">Email</span></dt>
+        <dd>
+            <span>{{tbc_cliente.email}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_cliente.imprimir">Imprimir</span></dt>
+        <dd>
+            <span>{{tbc_cliente.imprimir}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_cliente.enviar_email">Enviar Email</span></dt>
+        <dd>
+            <span>{{tbc_cliente.enviar_email}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_cliente.directiva_data_atu">Directiva Data Atu</span></dt>
+        <dd>
+            <span>{{tbc_cliente.directiva_data_atu | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_cliente.cpf_cnpj">Cpf Cnpj</span></dt>
+        <dd>
+            <span>{{tbc_cliente.cpf_cnpj}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_cliente.codigo_cliente">Codigo Cliente</span></dt>
+        <dd>
+            <span>{{tbc_cliente.codigo_cliente}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_cliente.removido">Removido</span></dt>
+        <dd>
+            <span>{{tbc_cliente.removido}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_cliente.bairro">Bairro</span></dt>
+        <dd>
+            <span>{{tbc_cliente.bairro}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_cliente.bloquear">Bloquear</span></dt>
+        <dd>
+            <span>{{tbc_cliente.bloquear}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_cliente.descricao">Descricao</span></dt>
+        <dd>
+            <span>{{tbc_cliente.descricao}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_cliente.tbc_instituicao">Tbc Instituicao</span></dt>
+        <dd>
+            <div *ngIf="tbc_cliente.tbc_instituicao">
+                <a [routerLink]="['/tbc-instituicao', tbc_cliente.tbc_instituicao?.id]">{{tbc_cliente.tbc_instituicao?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_cliente.tbc_grupo_cliente">Tbc Grupo Cliente</span></dt>
+        <dd>
+            <div *ngIf="tbc_cliente.tbc_grupo_cliente">
+                <a [routerLink]="['/tbc-grupo-cliente', tbc_cliente.tbc_grupo_cliente?.id]">{{tbc_cliente.tbc_grupo_cliente?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'tbc-cliente/'+ tbc_cliente.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

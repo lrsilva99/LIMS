@@ -1,0 +1,63 @@
+
+<div *ngIf="tbc_analises_componente">
+    <h2><span jhiTranslate="limsApp.tbc_analises_componente.detail.title">Tbc Analises Componente</span> {{tbc_analises_componente.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row">
+        <dt><span jhiTranslate="limsApp.tbc_analises_componente.nome">Nome</span></dt>
+        <dd>
+            <span>{{tbc_analises_componente.nome}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_analises_componente.descricao">Descricao</span></dt>
+        <dd>
+            <span>{{tbc_analises_componente.descricao}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_analises_componente.linha">Linha</span></dt>
+        <dd>
+            <span>{{tbc_analises_componente.linha}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_analises_componente.unidade_medida">Unidade Medida</span></dt>
+        <dd>
+            <span>{{tbc_analises_componente.unidade_medida}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_analises_componente.valor_padrao">Valor Padrao</span></dt>
+        <dd>
+            <span>{{tbc_analises_componente.valor_padrao}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_analises_componente.configuracao">Configuracao</span></dt>
+        <dd>
+            <span>{{tbc_analises_componente.configuracao}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_analises_componente.tbc_instituicao">Tbc Instituicao</span></dt>
+        <dd>
+            <div *ngIf="tbc_analises_componente.tbc_instituicao">
+                <a [routerLink]="['/tbc-instituicao', tbc_analises_componente.tbc_instituicao?.id]">{{tbc_analises_componente.tbc_instituicao?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_analises_componente.tbc_tipo_campo">Tbc Tipo Campo</span></dt>
+        <dd>
+            <div *ngIf="tbc_analises_componente.tbc_tipo_campo">
+                <a [routerLink]="['/tbc-tipo-campo', tbc_analises_componente.tbc_tipo_campo?.id]">{{tbc_analises_componente.tbc_tipo_campo?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_analises_componente.tbc_analises">Tbc Analises</span></dt>
+        <dd>
+            <div *ngIf="tbc_analises_componente.tbc_analises">
+                <a [routerLink]="['/tbc-analises', tbc_analises_componente.tbc_analises?.id]">{{tbc_analises_componente.tbc_analises?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'tbc-analises-componente/'+ tbc_analises_componente.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

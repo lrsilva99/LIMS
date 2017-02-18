@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns='http://www.ehcache.org/v3'
+         xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd">
+
+    <cache-template name="simple">
+        <expiry>
+            <ttl unit="seconds">3600</ttl>
+        </expiry>
+        <heap unit="entries">1000</heap>
+    </cache-template>
+
+    <cache alias="com.labotec.lims.domain.User" uses-template="simple"/>
+
+    <cache alias="com.labotec.lims.domain.Authority" uses-template="simple"/>
+
+    <cache alias="com.labotec.lims.domain.User.authorities" uses-template="simple"/>
+
+    <cache alias="com.labotec.lims.domain.PersistentToken" uses-template="simple"/>
+
+    <cache alias="com.labotec.lims.domain.User.persistentTokens" uses-template="simple"/>
+
+    <cache alias="com.labotec.lims.domain.Tbc_cliente" uses-template="simple"/>
+
+    <cache alias="com.labotec.lims.domain.Tbc_instituicao" uses-template="simple"/>
+
+    <cache alias="com.labotec.lims.domain.Tbc_sub_grupo" uses-template="simple"/>
+
+    <cache alias="com.labotec.lims.domain.Tbc_grupo_analise" uses-template="simple"/>
+
+    <cache alias="com.labotec.lims.domain.Tbc_frases" uses-template="simple"/>
+
+    <cache alias="com.labotec.lims.domain.Tbc_frases_opcoes" uses-template="simple"/>
+
+    <cache alias="com.labotec.lims.domain.Tbc_formulario" uses-template="simple"/>
+
+    <cache alias="com.labotec.lims.domain.Tbc_tipo_cadastro" uses-template="simple"/>
+
+    <cache alias="com.labotec.lims.domain.Tbc_relatorio_ensaio" uses-template="simple"/>
+
+    <cache alias="com.labotec.lims.domain.Tbc_analises" uses-template="simple"/>
+
+    <cache alias="com.labotec.lims.domain.Tbc_lab_tercerizado" uses-template="simple"/>
+
+    <cache alias="com.labotec.lims.domain.Tbc_report" uses-template="simple"/>
+
+    <cache alias="com.labotec.lims.domain.Tbc_tipo_campo" uses-template="simple"/>
+
+    <cache alias="com.labotec.lims.domain.Tbc_analises_componente" uses-template="simple"/>
+
+    <cache alias="com.labotec.lims.domain.Tbc_grupo_cliente" uses-template="simple"/>
+
+    <cache alias="com.labotec.lims.domain.Tbc_plano_teste" uses-template="simple"/>
+
+    <cache alias="com.labotec.lims.domain.Tbc_plano_teste_analise" uses-template="simple"/>
+
+    <!-- jhipster-needle-ehcache-add-entry -->
+</config>

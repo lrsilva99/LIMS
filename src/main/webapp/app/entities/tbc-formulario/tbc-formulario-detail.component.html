@@ -1,0 +1,65 @@
+
+<div *ngIf="tbc_formulario">
+    <h2><span jhiTranslate="limsApp.tbc_formulario.detail.title">Tbc Formulario</span> {{tbc_formulario.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row">
+        <dt><span jhiTranslate="limsApp.tbc_formulario.nome">Nome</span></dt>
+        <dd>
+            <span>{{tbc_formulario.nome}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_formulario.metodo">Metodo</span></dt>
+        <dd>
+            <span>{{tbc_formulario.metodo}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_formulario.descricao">Descricao</span></dt>
+        <dd>
+            <span>{{tbc_formulario.descricao}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_formulario.diasliberacao">Diasliberacao</span></dt>
+        <dd>
+            <span>{{tbc_formulario.diasliberacao}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_formulario.removido">Removido</span></dt>
+        <dd>
+            <span>{{tbc_formulario.removido}}</span>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_formulario.tbc_instituicao">Tbc Instituicao</span></dt>
+        <dd>
+            <div *ngIf="tbc_formulario.tbc_instituicao">
+                <a [routerLink]="['/tbc-instituicao', tbc_formulario.tbc_instituicao?.id]">{{tbc_formulario.tbc_instituicao?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_formulario.tbc_sub_grupo">Tbc Sub Grupo</span></dt>
+        <dd>
+            <div *ngIf="tbc_formulario.tbc_sub_grupo">
+                <a [routerLink]="['/tbc-sub-grupo', tbc_formulario.tbc_sub_grupo?.id]">{{tbc_formulario.tbc_sub_grupo?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_formulario.tbc_grupo_analise">Tbc Grupo Analise</span></dt>
+        <dd>
+            <div *ngIf="tbc_formulario.tbc_grupo_analise">
+                <a [routerLink]="['/tbc-grupo-analise', tbc_formulario.tbc_grupo_analise?.id]">{{tbc_formulario.tbc_grupo_analise?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="limsApp.tbc_formulario.tbc_tipo_cadastro">Tbc Tipo Cadastro</span></dt>
+        <dd>
+            <div *ngIf="tbc_formulario.tbc_tipo_cadastro">
+                <a [routerLink]="['/tbc-tipo-cadastro', tbc_formulario.tbc_tipo_cadastro?.id]">{{tbc_formulario.tbc_tipo_cadastro?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'tbc-formulario/'+ tbc_formulario.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

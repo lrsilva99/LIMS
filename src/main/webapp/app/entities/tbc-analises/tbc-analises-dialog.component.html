@@ -1,0 +1,150 @@
+
+
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+        <h4 class="modal-title" id="myTbc_analisesLabel" jhiTranslate="limsApp.tbc_analises.home.createOrEditLabel">Create or edit a Tbc Analises</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!tbc_analises.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="tbc_analises.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="limsApp.tbc_analises.nome" for="field_nome">Nome</label>
+            <input type="text" class="form-control" name="nome" id="field_nome"
+                [(ngModel)]="tbc_analises.nome"
+            required />
+            <div [hidden]="!(editForm.controls.nome?.dirty && editForm.controls.nome?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nome?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="limsApp.tbc_analises.descricao" for="field_descricao">Descricao</label>
+            <textarea class="form-control" name="descricao" id="field_descricao"
+                [(ngModel)]="tbc_analises.descricao"  ></textarea>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="limsApp.tbc_analises.numerodias" for="field_numerodias">Numerodias</label>
+            <input type="number" class="form-control" name="numerodias" id="field_numerodias"
+                [(ngModel)]="tbc_analises.numerodias"
+            required />
+            <div [hidden]="!(editForm.controls.numerodias?.dirty && editForm.controls.numerodias?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.numerodias?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.numerodias?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="limsApp.tbc_analises.metpop" for="field_metpop">Metpop</label>
+            <input type="text" class="form-control" name="metpop" id="field_metpop"
+                [(ngModel)]="tbc_analises.metpop"
+            required />
+            <div [hidden]="!(editForm.controls.metpop?.dirty && editForm.controls.metpop?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.metpop?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="limsApp.tbc_analises.removido" for="field_removido">Removido</label>
+            <input type="checkbox" class="form-control" name="removido" id="field_removido"
+                [(ngModel)]="tbc_analises.removido"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="limsApp.tbc_analises.tercerizado" for="field_tercerizado">Tercerizado</label>
+            <input type="checkbox" class="form-control" name="tercerizado" id="field_tercerizado"
+                [(ngModel)]="tbc_analises.tercerizado"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="limsApp.tbc_analises.directiva_data_atu" for="field_directiva_data_atu">Directiva Data Atu</label>
+            <div class="input-group">
+                <input id="field_directiva_data_atu" type="datetime-local" class="form-control" name="directiva_data_atu" [(ngModel)]="tbc_analises.directiva_data_atu"
+                  />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="limsApp.tbc_analises.tbc_sub_grupo" for="field_tbc_sub_grupo">Tbc Sub Grupo</label>
+            <select class="form-control" id="field_tbc_sub_grupo" name="tbc_sub_grupo" [(ngModel)]="tbc_analises.tbc_sub_grupo"  required>
+                <option [ngValue]="null"></option>
+                <option [ngValue]="tbc_sub_grupoOption.id === tbc_analises.tbc_sub_grupo?.id ? tbc_analises.tbc_sub_grupo : tbc_sub_grupoOption" *ngFor="let tbc_sub_grupoOption of tbc_sub_grupos; trackBy: trackTbc_sub_grupoById">{{tbc_sub_grupoOption.id}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.tbc_sub_grupo?.dirty && editForm.controls.tbc_sub_grupo?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!tbc_sub_grupo?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="limsApp.tbc_analises.tbc_grupo_analise" for="field_tbc_grupo_analise">Tbc Grupo Analise</label>
+            <select class="form-control" id="field_tbc_grupo_analise" name="tbc_grupo_analise" [(ngModel)]="tbc_analises.tbc_grupo_analise"  required>
+                <option [ngValue]="null"></option>
+                <option [ngValue]="tbc_grupo_analiseOption.id === tbc_analises.tbc_grupo_analise?.id ? tbc_analises.tbc_grupo_analise : tbc_grupo_analiseOption" *ngFor="let tbc_grupo_analiseOption of tbc_grupo_analises; trackBy: trackTbc_grupo_analiseById">{{tbc_grupo_analiseOption.id}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.tbc_grupo_analise?.dirty && editForm.controls.tbc_grupo_analise?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!tbc_grupo_analise?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="limsApp.tbc_analises.tbc_tipo_cadastro" for="field_tbc_tipo_cadastro">Tbc Tipo Cadastro</label>
+            <select class="form-control" id="field_tbc_tipo_cadastro" name="tbc_tipo_cadastro" [(ngModel)]="tbc_analises.tbc_tipo_cadastro"  required>
+                <option [ngValue]="null"></option>
+                <option [ngValue]="tbc_tipo_cadastroOption.id === tbc_analises.tbc_tipo_cadastro?.id ? tbc_analises.tbc_tipo_cadastro : tbc_tipo_cadastroOption" *ngFor="let tbc_tipo_cadastroOption of tbc_tipo_cadastros; trackBy: trackTbc_tipo_cadastroById">{{tbc_tipo_cadastroOption.id}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.tbc_tipo_cadastro?.dirty && editForm.controls.tbc_tipo_cadastro?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!tbc_tipo_cadastro?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="limsApp.tbc_analises.tbc_instituicao" for="field_tbc_instituicao">Tbc Instituicao</label>
+            <select class="form-control" id="field_tbc_instituicao" name="tbc_instituicao" [(ngModel)]="tbc_analises.tbc_instituicao"  required>
+                <option [ngValue]="null"></option>
+                <option [ngValue]="tbc_instituicaoOption.id === tbc_analises.tbc_instituicao?.id ? tbc_analises.tbc_instituicao : tbc_instituicaoOption" *ngFor="let tbc_instituicaoOption of tbc_instituicaos; trackBy: trackTbc_instituicaoById">{{tbc_instituicaoOption.id}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.tbc_instituicao?.dirty && editForm.controls.tbc_instituicao?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!tbc_instituicao?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="limsApp.tbc_analises.tbc_report" for="field_tbc_report">Tbc Report</label>
+            <select class="form-control" id="field_tbc_report" name="tbc_report" [(ngModel)]="tbc_analises.tbc_report" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="tbc_reportOption.id === tbc_analises.tbc_report?.id ? tbc_analises.tbc_report : tbc_reportOption" *ngFor="let tbc_reportOption of tbc_reports; trackBy: trackTbc_reportById">{{tbc_reportOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
